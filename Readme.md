@@ -9,6 +9,7 @@ A Flashcard app that displays a question and then when the question is tapped, i
 
 
 <img src="http://g.recordit.co/TEo5UfhERA.gif" width=200><br>
+<img src="http://g.recordit.co/uPlSKlDk8h.gif" width=200><br>
 
 
 
@@ -19,6 +20,6 @@ A Flashcard app that displays a question and then when the question is tapped, i
 - [X] Build in logic to show the answer side when the card is tapped
 - [X] Push code to GitHub
 ## Optional
-- [ ] Toggle the flashcard between the question side and the answer side
-- [ ] Style the question and answer side of the card to better distinguish between the two sides
-- [ ] Add selectable multiple choice answers beneath the card
+- [X] Toggle the flashcard between the question side and the answer side
+- [X] Style the question and answer side of the card to better distinguish between the two sides
+- [X] Add selectable multiple choice answers beneath the card
