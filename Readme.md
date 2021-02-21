@@ -3,7 +3,7 @@
 ## Lab 1
 
 ### App Description
-A Flashcard app that displays a question and then when the question is tapped, it displays the answer.
+A Flashcard app that displays a question and then when the question is tapped, it displays the answer. The app can also display three choices and when the correct choice is selected, the answer reveals itself.
 
 ### App Walk-though
 
