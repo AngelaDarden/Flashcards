@@ -9,7 +9,7 @@ A Flashcard app that displays a question and then when the question is tapped, i
 
 
 <img src="http://g.recordit.co/TEo5UfhERA.gif" width=200><br>
-<img src="http://g.recordit.co/uPlSKlDk8h.gif" width=200><br>
+<img src="http://g.recordit.co/MV2pEfHQ1s.gif" width=200><br>
 
 
 
