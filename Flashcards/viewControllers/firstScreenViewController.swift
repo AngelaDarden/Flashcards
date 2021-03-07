@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class firstScreenViewController: UIViewController {
     
     // front label is the question
     // back label is the answer
@@ -53,6 +53,18 @@ class ViewController: UIViewController {
         btnOptionThree.layer.borderColor = #colorLiteral(red: 0.7188917994, green: 0.2311008573, blue: 0.9843792319, alpha: 1)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // We know the destinataion of the segue is in the Navigation Controller
+        let navigationController = segue.destination as! UINavigationController
+        
+        // We know the Navigationo Controller only contains a Creation View Controller
+        let secondScreenViewController = navigationController.topViewController as! secondScreenViewController
+        
+        // We set the flashcardsController property to self
+        secondScreenViewController.flashcardsController = self
+    }
+    
     @IBAction func didTapOnFlashcard(_ sender: Any) {
         if (frontLabel.isHidden == false) {
             frontLabel.isHidden = true
@@ -61,6 +73,11 @@ class ViewController: UIViewController {
         else if (frontLabel.isHidden == true){
             frontLabel.isHidden = false
         }
+    }
+    
+    func updateFlashcard(question: String, answer: String) {
+        frontLabel.text = question
+        backLabel.text = answer
     }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
