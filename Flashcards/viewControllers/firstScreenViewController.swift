@@ -7,7 +7,8 @@
 
 import UIKit
 
-class firstScreenViewController: UIViewController {
+class firstScreenViewController: UIViewController
+{
     
     // front label is the question
     // back label is the answer
@@ -20,7 +21,8 @@ class firstScreenViewController: UIViewController {
     @IBOutlet weak var btnOptionTwo: UIButton!
     @IBOutlet weak var btnOptionThree: UIButton!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         // Rounded corners
@@ -53,42 +55,58 @@ class firstScreenViewController: UIViewController {
         btnOptionThree.layer.borderColor = #colorLiteral(red: 0.7188917994, green: 0.2311008573, blue: 0.9843792319, alpha: 1)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
         // We know the destinataion of the segue is in the Navigation Controller
         let navigationController = segue.destination as! UINavigationController
         
         // We know the Navigationo Controller only contains a Creation View Controller
         let secondScreenViewController = navigationController.topViewController as! secondScreenViewController
         
+        if (segue.identifier == "EditSegue"){
+        secondScreenViewController.initialQuestion = frontLabel.text
+        secondScreenViewController.initialAnswer = backLabel.text
+        }
+        
         // We set the flashcardsController property to self
         secondScreenViewController.flashcardsController = self
     }
     
-    @IBAction func didTapOnFlashcard(_ sender: Any) {
-        if (frontLabel.isHidden == false) {
+    @IBAction func didTapOnFlashcard(_ sender: Any)
+    {
+        if (frontLabel.isHidden == false)
+        {
             frontLabel.isHidden = true
         }
         
-        else if (frontLabel.isHidden == true){
+        else if (frontLabel.isHidden == true)
+        {
             frontLabel.isHidden = false
         }
     }
     
-    func updateFlashcard(question: String, answer: String) {
+    func updateFlashcard(question: String, answer: String, extraAnswerOne: String?, extraAnswerTwo: String?)
+    {
         frontLabel.text = question
         backLabel.text = answer
+        
+        btnOptionOne.setTitle(extraAnswerOne, for: .normal)
+        btnOptionTwo.setTitle(answer, for: .normal)
+        btnOptionThree.setTitle(extraAnswerTwo, for: .normal)
     }
     
-    @IBAction func didTapOptionOne(_ sender: Any) {
+    @IBAction func didTapOptionOne(_ sender: Any)
+    {
         btnOptionOne.isHidden = true
     }
     
-    @IBAction func didTapOptionTwo(_ sender: Any) {
+    @IBAction func didTapOptionTwo(_ sender: Any)
+    {
         frontLabel.isHidden = true
     }
     
-    @IBAction func didTapOptionThree(_ sender: Any) {
+    @IBAction func didTapOptionThree(_ sender: Any)
+    {
         btnOptionThree.isHidden = true
     }
 }

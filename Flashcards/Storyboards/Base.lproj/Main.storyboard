@@ -36,6 +36,15 @@
                                         <color key="textColor" systemColor="systemPurpleColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekE-Zf-lX3">
+                                        <rect key="frame" x="222" y="92" width="54" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="✏️"/>
+                                        <connections>
+                                            <segue destination="0IS-Px-VSG" kind="show" identifier="EditSegue" id="Oqb-qw-PCL"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -132,6 +141,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Extra Answer #1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UoY-qs-VaY">
+                                <rect key="frame" x="55" y="404" width="310" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Extra Answer #2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wYE-0c-hRb">
+                                <rect key="frame" x="55" y="491" width="310" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aQg-6G-x81"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -149,19 +170,22 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="answerTextField" destination="E7P-Hf-TGy" id="YPD-X1-caX"/>
-                        <outlet property="questionTextField" destination="fH1-wu-KPD" id="yTU-PY-Pvr"/>
+                        <outlet property="answerTextField" destination="E7P-Hf-TGy" id="5hT-ZJ-Ncq"/>
+                        <outlet property="extraAnswerOneTextField" destination="UoY-qs-VaY" id="dkn-hk-fAn"/>
+                        <outlet property="extraAnswerTwoTextField" destination="wYE-0c-hRb" id="ceu-Nb-NCY"/>
+                        <outlet property="questionTextField" destination="fH1-wu-KPD" id="clb-FC-cMb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TiV-HH-9eR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1594.2028985507247" y="113.83928571428571"/>
+            <point key="canvasLocation" x="1398.5507246376812" y="112.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uiL-SV-6PV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0IS-Px-VSG" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="tRz-zf-nHB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rHN-fj-rkU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -176,6 +200,9 @@
             <point key="canvasLocation" x="684.05797101449275" y="113.83928571428571"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Oqb-qw-PCL"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
