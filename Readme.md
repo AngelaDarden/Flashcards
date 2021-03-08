@@ -7,7 +7,7 @@ The user can now change the question and answer that is displayed when tapped. T
 ### App Walk-though
 
 <img src="http://g.recordit.co/2V3cpJc8w2.gif" width=200><br>
-<img src="http://g.recordit.co/2KG8a8TRmg.gif" width=200><br>
+<img src="http://g.recordit.co/QqZSUXOzem.gif" width=200><br>
 
 ## Required
 - [X] User can open the creation screen
