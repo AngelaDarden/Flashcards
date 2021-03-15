@@ -64,8 +64,7 @@ class secondScreenViewController: UIViewController
             present(alert, animated: true)
         }
         
-        else
-        {
+            
             // If the fields aren't missing anything, continue
             // Call the function to update the flashcard
             flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraAnswerOneText!, extraAnswerTwo: extraAnswerTwoText!)
@@ -74,4 +73,3 @@ class secondScreenViewController: UIViewController
         dismiss(animated: true)
         }
     }
-}
