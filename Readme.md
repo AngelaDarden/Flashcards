@@ -2,7 +2,7 @@
 ## Lab 3
 
 ### App Description
-The user can now have a set of flashcards that are stored on a disk as well as browse through them.
+The user can now have a set of flashcards that are stored on a disk and are saved even when the user closes the app. As well as browse through all the flashcards they have created.
 
 ### App Walk-though
 
