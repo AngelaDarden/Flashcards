@@ -2,11 +2,12 @@
 ## Lab 2
 
 ### App Description
-The user can now change the question and answer that is displayed when tapped.
+The user can now change the question and answer that is displayed when tapped. The user can customize the question and the answer choices that are shown. The user can also create a new flashcard but if any field is missing text, an error will appear.
 
 ### App Walk-though
 
 <img src="http://g.recordit.co/2V3cpJc8w2.gif" width=200><br>
+<img src="http://g.recordit.co/QSIQsKi9hZ.gif" width=200><br>
 
 ## Required
 - [X] User can open the creation screen
@@ -14,9 +15,9 @@ The user can now change the question and answer that is displayed when tapped.
 - [X] User can enter a new question and answer in the creation screen to then show it on the flashcard
 - [X] Push code to GitHub
 ## Optional
-- [ ] User gets an error if they try to create a new flashcard with no question or answer
-- [ ] User can edit existing flashcard
-- [ ] User can add multiple choice answers in the creation screen
+- [X] User gets an error if they try to create a new flashcard with no question or answer
+- [X] User can edit existing flashcard
+- [X] User can add multiple choice answers in the creation screen
 
 
 ## Lab 1
