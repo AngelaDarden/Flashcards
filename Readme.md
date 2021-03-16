@@ -7,6 +7,7 @@ The user can now have a set of flashcards that are stored on a disk and are save
 ### App Walk-though
 
 <img src="http://g.recordit.co/j9ZYy5VQ3B.gif" width=200><br>
+<img src="http://g.recordit.co/KftcXIptxl.gif" width=200><br>
 
 
 ## Required
@@ -14,9 +15,9 @@ The user can now have a set of flashcards that are stored on a disk and are save
 - [X] User can re-open the app and see previously created flashcards
 - [X] Push code to GitHub
 ## Optional
-- [ ] User can delete a flashcard
-- [ ] User can edit existing flashcard
-- [ ] User can store multiple choice questions
+- [X] User can delete a flashcard
+- [X] User can edit existing flashcard
+- [X] User can store multiple choice questions
 
 ## Lab 2
 
