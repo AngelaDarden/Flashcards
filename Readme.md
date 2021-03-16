@@ -1,4 +1,24 @@
 ## Study in a Flash
+## Lab 3
+
+### App Description
+The user can now have a set of flashcards that are stored on a disk and are saved even when the user closes the app. As well as browse through all the flashcards they have created with their respective answer choices. Another feature is that the user can delete a flashcard and edit any flashcard.
+
+### App Walk-though
+
+<img src="http://g.recordit.co/j9ZYy5VQ3B.gif" width=200><br>
+<img src="http://g.recordit.co/KftcXIptxl.gif" width=200><br>
+
+
+## Required
+- [X] User can browse through multiple flashcards
+- [X] User can re-open the app and see previously created flashcards
+- [X] Push code to GitHub
+## Optional
+- [X] User can delete a flashcard
+- [X] User can edit existing flashcard
+- [X] User can store multiple choice questions
+
 ## Lab 2
 
 ### App Description
