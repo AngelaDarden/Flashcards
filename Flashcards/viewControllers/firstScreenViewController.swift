@@ -11,6 +11,8 @@ struct Flashcard
 {
     var question: String
     var answer: String
+    var answer2: String
+    var answer3: String
 }
 
 class firstScreenViewController: UIViewController
@@ -69,14 +71,14 @@ class firstScreenViewController: UIViewController
         
         btnOptionThree.layer.borderWidth = 3.0
         btnOptionThree.layer.borderColor = #colorLiteral(red: 0.7188917994, green: 0.2311008573, blue: 0.9843792319, alpha: 1)
-  
+        
         // Read saved flashcards
         readSavedFlashcards()
         
         // Adding our initial flashcard if needed
         if flashcards.count == 0
         {
-            updateFlashcard(question: "What's the capital of Brasil?", answer: "Brasilia", extraAnswerOne: "Santiago", extraAnswerTwo: "Buenos Aires")
+            updateFlashcard(question: "What's the capital of Brasil?", answer: "Brasilia", extraAnswerOne: "Santiago", extraAnswerTwo: "Buenos Aires", isExisting: false)
         }
         
         else
@@ -84,8 +86,8 @@ class firstScreenViewController: UIViewController
             updateLabels()
             updateNextPrevButtons()
         }
-    }
-
+    } // End of viewDidLoad()
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         // We know the destinataion of the segue is in the Navigation Controller
@@ -95,13 +97,13 @@ class firstScreenViewController: UIViewController
         let secondScreenViewController = navigationController.topViewController as! secondScreenViewController
         
         if (segue.identifier == "EditSegue"){
-        secondScreenViewController.initialQuestion = frontLabel.text
-        secondScreenViewController.initialAnswer = backLabel.text
+            secondScreenViewController.initialQuestion = frontLabel.text
+            secondScreenViewController.initialAnswer = backLabel.text
         }
         
         // We set the flashcardsController property to self
         secondScreenViewController.flashcardsController = self
-    }
+    } // End of prepare()
     
     @IBAction func didTapOnFlashcard(_ sender: Any)
     {
@@ -114,11 +116,11 @@ class firstScreenViewController: UIViewController
         {
             frontLabel.isHidden = false
         }
-    }
+    } // End of didTapOnFlashcard()
     
-    func updateFlashcard(question: String, answer: String, extraAnswerOne: String?, extraAnswerTwo: String?)
+    func updateFlashcard(question: String, answer: String, extraAnswerOne: String, extraAnswerTwo: String, isExisting: Bool)
     {
-        let flashcard = Flashcard(question: question, answer: answer)
+        let flashcard = Flashcard(question: question, answer: answer, answer2: extraAnswerOne, answer3: extraAnswerTwo)
         
         
         frontLabel.text = flashcard.question
@@ -127,18 +129,26 @@ class firstScreenViewController: UIViewController
         btnOptionOne.setTitle(extraAnswerOne, for: .normal)
         btnOptionTwo.setTitle(answer, for: .normal)
         btnOptionThree.setTitle(extraAnswerTwo, for: .normal)
-                
         
-        // Adding flashcard in the flashcards array
-        flashcards.append(flashcard)
+        if isExisting
+        {
+            // Replace existing flashcard
+            flashcards[currentIndex] = flashcard
+        }
         
-        // Logging to the console
-        print("Added new flashcard :)")
-        print("We now have \(flashcards.count) flashcards")
-        
-        // Update current index
-        currentIndex = flashcards.count - 1
-        print("Our current index is \(currentIndex)")
+        else
+        {
+            // Adding flashcard in the flashcards array
+            flashcards.append(flashcard)
+            
+            // Logging to the console
+            print("Added new flashcard :)")
+            print("We now have \(flashcards.count) flashcards")
+            
+            // Update current index
+            currentIndex = flashcards.count - 1
+            print("Our current index is \(currentIndex)")
+        }
         
         // Update buttons
         updateNextPrevButtons()
@@ -148,7 +158,7 @@ class firstScreenViewController: UIViewController
         
         // Saving
         saveAllFlashcardsToDisk()
-    }
+    } // End of updateFlashcard()
     
     @IBAction func didTapOptionOne(_ sender: Any)
     {
@@ -167,7 +177,7 @@ class firstScreenViewController: UIViewController
     
     @IBAction func didTapOnPrev(_ sender: Any)
     {
-     
+        
         // Decrease current index
         currentIndex = currentIndex - 1
         
@@ -176,7 +186,7 @@ class firstScreenViewController: UIViewController
         
         // Update buttons
         updateNextPrevButtons()
-    }
+    } // End of didTapOnPrev()
     
     @IBAction func didTapOnNext(_ sender: Any)
     {
@@ -189,7 +199,7 @@ class firstScreenViewController: UIViewController
         
         // Update buttons
         updateNextPrevButtons()
-    }
+    } // End of didTapOnNext()
     
     func updateNextPrevButtons()
     {
@@ -215,7 +225,7 @@ class firstScreenViewController: UIViewController
         {
             prevButton.isEnabled = true
         }
-    }
+    } // End of updateNextPrevButtons()
     
     func updateLabels()
     {
@@ -225,13 +235,17 @@ class firstScreenViewController: UIViewController
         // Update labels
         frontLabel.text = currentFlashcard.question
         backLabel.text = currentFlashcard.answer
-    }
+        
+        btnOptionOne.setTitle(currentFlashcard.answer2, for: .normal)
+        btnOptionTwo.setTitle(currentFlashcard.answer, for: .normal)
+        btnOptionThree.setTitle(currentFlashcard.answer3, for: .normal)
+    } // End of updateLabels()
     
     func saveAllFlashcardsToDisk()
     {
         // From flashcard array to dictionary array
         let dictionaryArray = flashcards.map { (card) -> [String: String] in
-            return ["question": card.question, "answer": card.answer]
+            return ["question": card.question, "answer": card.answer, "answer2": card.answer2, "answer3": card.answer3]
         }
         
         // Save array to disk using UserDefaults
@@ -240,7 +254,7 @@ class firstScreenViewController: UIViewController
         // Log it
         print("Flashcards saved to UserDefaults")
         
-    }
+    } // End of saveAllFlashcardsToDisk()
     
     func readSavedFlashcards()
     {
@@ -250,16 +264,50 @@ class firstScreenViewController: UIViewController
             
             // In here we know for sure we have a dictionary array
             let savedCards = dictionaryArray.map
-            { dictionary -> Flashcard in
-                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!)
+            { (dictionary) -> Flashcard in
+                return Flashcard(question: dictionary["question"] ?? "Question", answer: dictionary["answer"] ?? "Answer", answer2: dictionary["answer2"] ?? "Answer2", answer3: dictionary["answer3"] ?? "Answer3")
             }
             
             // Put all these cards in out flashcards array
             flashcards.append(contentsOf: savedCards)
             
         }
-        
-    }
+    } // End of readSavedFlashcards()
     
-}
+    @IBAction func didTapOnDelete(_ sender: Any)
+    {
+        // Show confirmation
+        let alert = UIAlertController(title: "Delete flashcard", message: "Are you sure you want to delete it?", preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive)
+        { action in
+            self.deleteCurrentFlashcard()
+        }
+        
+        alert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    } // End of didTapOnDelete()
+    
+    func deleteCurrentFlashcard()
+    {
+        // Delete current
+        flashcards.remove(at: currentIndex)
+        
+        // Specual case: Check if last card was deleted
+        if currentIndex > flashcards.count - 1
+        {
+            currentIndex = flashcards.count - 1
+        }
+        
+        updateNextPrevButtons()
+        updateLabels()
+        saveAllFlashcardsToDisk()
+    } // End of deleteCurrentFlahcard()
+    
+} // End of firstScreenViewController
 
