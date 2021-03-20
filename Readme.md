@@ -6,8 +6,9 @@ The user can now have a set of flashcards that are stored on a disk and are save
 
 ### App Walk-though
 
-<img src="http://g.recordit.co/j9ZYy5VQ3B.gif" width=200><br>
 <img src="http://g.recordit.co/KftcXIptxl.gif" width=200><br>
+<img src="http://g.recordit.co/j9ZYy5VQ3B.gif" width=200><br>
+
 
 
 ## Required
