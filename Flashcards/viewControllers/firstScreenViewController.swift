@@ -39,6 +39,9 @@ class firstScreenViewController: UIViewController
     // Current flashcard index
     var currentIndex = 0
     
+    // For the previous button animation
+    var didTapOnPrev = false
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -75,19 +78,24 @@ class firstScreenViewController: UIViewController
         // Read saved flashcards
         readSavedFlashcards()
         
-        // Adding our initial flashcard if needed
+    } // End of viewDidLoad()
+    
+    override func viewDidAppear(_ animated: Bool) {
         if flashcards.count == 0
         {
-            updateFlashcard(question: "What's the capital of Brasil?", answer: "Brasilia", extraAnswerOne: "Santiago", extraAnswerTwo: "Buenos Aires", isExisting: false)
+            //updateFlashcard(question: "What's the capital of Brasil?", answer: "Brasilia", extraAnswerOne: "Santiago", extraAnswerTwo: "Buenos Aires", isExisting: false)
+            performSegue(withIdentifier: "newFlashcard", sender: self)
+            print("Flashcard0")
         }
         
         else
         {
             updateLabels()
             updateNextPrevButtons()
+            print("Flashcard1")
         }
-    } // End of viewDidLoad()
-    
+    }
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         // We know the destinataion of the segue is in the Navigation Controller
@@ -107,6 +115,16 @@ class firstScreenViewController: UIViewController
     
     @IBAction func didTapOnFlashcard(_ sender: Any)
     {
+        flipFlashcard()
+    } // End of didTapOnFlashcard()
+    
+    func flipFlashcard()
+    {
+        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            self.frontLabel.isHidden = true
+        })
+        
+        
         if (frontLabel.isHidden == false)
         {
             frontLabel.isHidden = true
@@ -116,7 +134,49 @@ class firstScreenViewController: UIViewController
         {
             frontLabel.isHidden = false
         }
-    } // End of didTapOnFlashcard()
+    } // End of flipFlashcard()
+    
+    func animateCardOut()
+    {
+        if (didTapOnPrev == false){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+        }, completion: { finished in
+            self.updateLabels()
+            self.animateCardIn()
+        })
+        } // end of if statement
+        
+        else{
+            UIView.animate(withDuration: 0.3){
+                self.card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+            } completion: { finished in
+            self.updateLabels()
+            self.animateCardIn()
+            }
+        } // end of else statement
+
+    } // end of animateCardOut
+    
+    func animateCardIn()
+    {
+        if (didTapOnPrev == false){
+        card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+
+            UIView.animate(withDuration: 0.3){
+            self.card.transform = CGAffineTransform.identity
+            }
+            
+        }// end of if statement
+        
+        else
+        {
+            card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+            UIView.animate(withDuration: 0.3) { self.card.transform = CGAffineTransform.identity}
+        } // end of else statement
+        didTapOnPrev = false
+        
+    } // end animateCardIn
     
     func updateFlashcard(question: String, answer: String, extraAnswerOne: String, extraAnswerTwo: String, isExisting: Bool)
     {
@@ -177,15 +237,19 @@ class firstScreenViewController: UIViewController
     
     @IBAction func didTapOnPrev(_ sender: Any)
     {
-        
+        didTapOnPrev = true
         // Decrease current index
         currentIndex = currentIndex - 1
         
         // Update labels
-        updateLabels()
+        //updateLabels()
         
         // Update buttons
         updateNextPrevButtons()
+        
+        animateCardIn()
+        
+        updateLabels()
     } // End of didTapOnPrev()
     
     @IBAction func didTapOnNext(_ sender: Any)
@@ -195,10 +259,12 @@ class firstScreenViewController: UIViewController
         currentIndex = currentIndex + 1
         
         // Update labels
-        updateLabels()
+        //updateLabels()
         
         // Update buttons
         updateNextPrevButtons()
+        
+        animateCardOut()
     } // End of didTapOnNext()
     
     func updateNextPrevButtons()
