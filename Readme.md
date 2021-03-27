@@ -1,4 +1,26 @@
 ## Study in a Flash
+
+## Lab 4
+
+### App Description
+The app now displays an icon on the iOS device's homescreen and when launching. When going in between flashcards there will be an animation that gives the effect of sliding.
+
+### App Walk-though
+
+<img src="http://g.recordit.co/4Fkh1LTFgl.gif" width=200><br>
+
+## Required
+- [X] User should see the app icon 
+- [X] User should see a splash screen
+- [X] User should see an flip animation when revealing the answer
+- [X] User should see a slide animation when going to the next flashcard
+- [X] User should see a slide animation when going to the previous flashcard
+- [X] Push code to GitHub
+## Optional
+- [ ] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
+- [ ] User should see all views properly layout when using the app on a phone of different sizes
+- [ ] Correct answer in multiple choice should be random
+
 ## Lab 3
 
 ### App Description
@@ -6,8 +28,8 @@ The user can now have a set of flashcards that are stored on a disk and are save
 
 ### App Walk-though
 
-<img src="http://g.recordit.co/j9ZYy5VQ3B.gif" width=200><br>
 <img src="http://g.recordit.co/KftcXIptxl.gif" width=200><br>
+<img src="http://g.recordit.co/j9ZYy5VQ3B.gif" width=200><br>
 
 
 ## Required
