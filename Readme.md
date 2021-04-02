@@ -3,7 +3,7 @@
 ## Lab 4
 
 ### App Description
-The app now displays an icon on the iOS device's homescreen and when launching. When going in between flashcards there will be an animation that gives the effect of sliding.
+The app now displays an icon on the iOS device's homescreen and when launching. When going in between flashcards there will be an animation that gives the effect of sliding. The user can now use the app on different sized devices without layout issues. The answer choices are in a random order on each card. Once the correct answer is chosen, a reset button will appear allowing the user to put back all the answer choices as well as flip the card back over showing the question.
 
 ### App Walk-though
 
