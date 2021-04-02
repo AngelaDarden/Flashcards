@@ -32,6 +32,8 @@ class firstScreenViewController: UIViewController
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var resetButton2: UIButton!
     
     // Array to hold flashcards
     var flashcards = [Flashcard]()
@@ -41,6 +43,9 @@ class firstScreenViewController: UIViewController
     
     // For the previous button animation
     var didTapOnPrev = false
+    
+    // Button to remember what the correct answer is
+    var correctAnswerButton: UIButton!
     
     override func viewDidLoad()
     {
@@ -63,6 +68,8 @@ class firstScreenViewController: UIViewController
         btnOptionOne.layer.cornerRadius = 20.0
         btnOptionTwo.layer.cornerRadius = 20.0
         btnOptionThree.layer.cornerRadius = 20.0
+        resetButton.layer.cornerRadius = 20.0
+        resetButton2.layer.cornerRadius = 20.0
         
         // Borders
         // Color box shows with "= Color Literal"
@@ -75,10 +82,79 @@ class firstScreenViewController: UIViewController
         btnOptionThree.layer.borderWidth = 3.0
         btnOptionThree.layer.borderColor = #colorLiteral(red: 0.7188917994, green: 0.2311008573, blue: 0.9843792319, alpha: 1)
         
+        resetButton.layer.borderWidth = 3.0
+        resetButton.layer.borderColor = #colorLiteral(red: 0.7188917994, green: 0.2311008573, blue: 0.9843792319, alpha: 1)
+        
+        resetButton2.layer.borderWidth = 3.0
+        resetButton2.layer.borderColor = #colorLiteral(red: 0.7188917994, green: 0.2311008573, blue: 0.9843792319, alpha: 1)
+        
         // Read saved flashcards
         readSavedFlashcards()
         
     } // End of viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        // For the flashcard
+        // First start with the flashcard invisible and slightly smaller in size
+        card.alpha = 0.0
+        card.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.card.alpha = 1.0
+            self.card.transform = CGAffineTransform.identity
+        })
+        
+        //For the multiple choice buttons
+        
+        // Button One
+        btnOptionOne.alpha = 0.0
+        btnOptionOne.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.btnOptionOne.alpha = 1.0
+            self.btnOptionOne.transform = CGAffineTransform.identity
+        })
+        
+        // Button Two
+        btnOptionTwo.alpha = 0.0
+        btnOptionTwo.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.btnOptionTwo.alpha = 1.0
+            self.btnOptionTwo.transform = CGAffineTransform.identity
+        })
+        
+        // Button Three
+        btnOptionThree.alpha = 0.0
+        btnOptionThree.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.btnOptionThree.alpha = 1.0
+            self.btnOptionThree.transform = CGAffineTransform.identity
+        })
+        
+        // Reset Button
+        resetButton.alpha = 0.0
+        resetButton.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.resetButton.alpha = 1.0
+            self.resetButton.transform = CGAffineTransform.identity
+        })
+        
+        // Reset for Option One
+        resetButton2.alpha = 0.0
+        resetButton2.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.resetButton2.alpha = 1.0
+            self.resetButton2.transform = CGAffineTransform.identity
+        })
+        
+    } // End of viewWillAppear()
     
     override func viewDidAppear(_ animated: Bool) {
         if flashcards.count == 0
@@ -220,19 +296,68 @@ class firstScreenViewController: UIViewController
         saveAllFlashcardsToDisk()
     } // End of updateFlashcard()
     
+    
+    @IBAction func didTapOnReset(_ sender: Any)
+    {
+        frontLabel.isHidden = false
+        btnOptionOne.isHidden = false
+        btnOptionTwo.isHidden = false
+        btnOptionThree.isHidden = false
+        resetButton.isHidden = true
+        resetButton2.isHidden = true
+    }
+    
+    
     @IBAction func didTapOptionOne(_ sender: Any)
     {
-        btnOptionOne.isHidden = true
+        if btnOptionOne == correctAnswerButton
+        {
+            flipFlashcard()
+            frontLabel.isHidden = true
+            btnOptionTwo.isHidden = true
+            btnOptionThree.isHidden = true
+            resetButton.isHidden = false
+        }
+        else
+        {
+            frontLabel.isHidden = false
+            btnOptionOne.isEnabled = true
+        }
     }
     
     @IBAction func didTapOptionTwo(_ sender: Any)
     {
-        frontLabel.isHidden = true
+        if btnOptionTwo == correctAnswerButton
+        {
+            flipFlashcard()
+            frontLabel.isHidden = true
+            btnOptionOne.isHidden = true
+            btnOptionThree.isHidden = true
+            resetButton.isHidden = false
+        }
+        else
+        {
+            frontLabel.isHidden = false
+            btnOptionTwo.isEnabled = true
+        }
     }
     
     @IBAction func didTapOptionThree(_ sender: Any)
     {
-        btnOptionThree.isHidden = true
+        if btnOptionThree == correctAnswerButton
+        {
+            flipFlashcard()
+            frontLabel.isHidden = true
+            btnOptionOne.isHidden = true
+            btnOptionTwo.isHidden = true
+            resetButton.isHidden = true
+            resetButton2.isHidden = false
+        }
+        else
+        {
+            frontLabel.isHidden = false
+            btnOptionThree.isEnabled = true
+        }
     }
     
     @IBAction func didTapOnPrev(_ sender: Any)
@@ -246,7 +371,7 @@ class firstScreenViewController: UIViewController
         
         // Update buttons
         updateNextPrevButtons()
-        
+       
         animateCardIn()
         
         updateLabels()
@@ -302,9 +427,23 @@ class firstScreenViewController: UIViewController
         frontLabel.text = currentFlashcard.question
         backLabel.text = currentFlashcard.answer
         
-        btnOptionOne.setTitle(currentFlashcard.answer2, for: .normal)
-        btnOptionTwo.setTitle(currentFlashcard.answer, for: .normal)
-        btnOptionThree.setTitle(currentFlashcard.answer3, for: .normal)
+        // Update buttons
+        let buttons = [btnOptionOne, btnOptionTwo, btnOptionThree].shuffled()
+        let answers = [currentFlashcard.answer, currentFlashcard.answer2, currentFlashcard.answer3].shuffled()
+        
+        // Iterate over both arrays at the same time
+        for (button, answer) in zip(buttons, answers)
+        {
+            // Set the title of this random button, with a random answer
+            button?.setTitle(answer, for: .normal)
+            
+            // If this is the correct answer save the button
+            if answer == currentFlashcard.answer
+            {
+                correctAnswerButton = button
+            } // End of if statement
+        } // End of for loop
+        
     } // End of updateLabels()
     
     func saveAllFlashcardsToDisk()
