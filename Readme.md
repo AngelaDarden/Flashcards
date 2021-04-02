@@ -12,6 +12,7 @@ The app now displays an icon on the iOS device's homescreen and when launching. 
 <img src="http://g.recordit.co/Mgkhf9Ml3B.gif" width=200><br>
 <img src="http://g.recordit.co/LrsYYuc81y.gif" width=200><br>
 <img src="http://g.recordit.co/ShayUDJRW5.gif" width=200><br>
+<img src="http://g.recordit.co/jRmXRcj3KL.gif" width=200><br>
 
 ## Required
 - [X] User should see the app icon 
