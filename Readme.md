@@ -3,11 +3,16 @@
 ## Lab 4
 
 ### App Description
-The app now displays an icon on the iOS device's homescreen and when launching. When going in between flashcards there will be an animation that gives the effect of sliding.
+The app now displays an icon on the iOS device's homescreen and when launching. And upon the user's first time using the app, they will be automatically taken to the creation screen. When going in between flashcards there will be an animation that gives the effect of sliding. The user can now use the app on different sized devices without layout issues. The answer choices are in a random order on each card. Once the correct answer is chosen, a reset button will appear allowing the user to put back all the answer choices as well as flip the card back over showing the question.
 
 ### App Walk-though
 
 <img src="http://g.recordit.co/4Fkh1LTFgl.gif" width=200><br>
+
+<img src="http://g.recordit.co/Mgkhf9Ml3B.gif" width=200><br>
+<img src="http://g.recordit.co/LrsYYuc81y.gif" width=200><br>
+<img src="http://g.recordit.co/ShayUDJRW5.gif" width=200><br>
+<img src="http://g.recordit.co/jRmXRcj3KL.gif" width=200><br>
 
 ## Required
 - [X] User should see the app icon 
@@ -17,9 +22,9 @@ The app now displays an icon on the iOS device's homescreen and when launching. 
 - [X] User should see a slide animation when going to the previous flashcard
 - [X] Push code to GitHub
 ## Optional
-- [ ] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
-- [ ] User should see all views properly layout when using the app on a phone of different sizes
-- [ ] Correct answer in multiple choice should be random
+- [X] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
+- [X] User should see all views properly layout when using the app on a phone of different sizes
+- [X] Correct answer in multiple choice should be random
 
 ## Lab 3
 
