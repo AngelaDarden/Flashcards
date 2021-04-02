@@ -11,6 +11,7 @@ The app now displays an icon on the iOS device's homescreen and when launching. 
 
 <img src="http://g.recordit.co/Mgkhf9Ml3B.gif" width=200><br>
 <img src="http://g.recordit.co/LrsYYuc81y.gif" width=200><br>
+<img src="http://g.recordit.co/ShayUDJRW5.gif" width=200><br>
 
 ## Required
 - [X] User should see the app icon 
@@ -20,9 +21,9 @@ The app now displays an icon on the iOS device's homescreen and when launching. 
 - [X] User should see a slide animation when going to the previous flashcard
 - [X] Push code to GitHub
 ## Optional
-- [ ] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
-- [ ] User should see all views properly layout when using the app on a phone of different sizes
-- [ ] Correct answer in multiple choice should be random
+- [X] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
+- [X] User should see all views properly layout when using the app on a phone of different sizes
+- [X] Correct answer in multiple choice should be random
 
 ## Lab 3
 
