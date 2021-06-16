@@ -15,6 +15,7 @@ struct Flashcard
     var answer3: String
 }
 
+
 class firstScreenViewController: UIViewController
 {
     
@@ -35,6 +36,8 @@ class firstScreenViewController: UIViewController
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var resetButton2: UIButton!
     
+    @IBOutlet weak var ScoreKeeperLabel: UILabel!
+    
     // Array to hold flashcards
     var flashcards = [Flashcard]()
     
@@ -46,6 +49,14 @@ class firstScreenViewController: UIViewController
     
     // Button to remember what the correct answer is
     var correctAnswerButton: UIButton!
+    
+    // Adding the counter
+    var ScoreKeeper = 0
+    
+    // Array to hold scores
+    var scores = [Int]()
+    
+    
     
     override func viewDidLoad()
     {
@@ -90,6 +101,14 @@ class firstScreenViewController: UIViewController
         
         // Read saved flashcards
         readSavedFlashcards()
+        
+        //Looks for single or multiple taps.
+             let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+            //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+            tap.cancelsTouchesInView = false
+
+            view.addGestureRecognizer(tap)
         
     } // End of viewDidLoad()
     
@@ -156,7 +175,8 @@ class firstScreenViewController: UIViewController
         
     } // End of viewWillAppear()
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)
+    {
         if flashcards.count == 0
         {
             //updateFlashcard(question: "What's the capital of Brasil?", answer: "Brasilia", extraAnswerOne: "Santiago", extraAnswerTwo: "Buenos Aires", isExisting: false)
@@ -170,15 +190,16 @@ class firstScreenViewController: UIViewController
             updateNextPrevButtons()
             print("Flashcard1")
         }
-    }
+    } // End of viewDidAppear()
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         // We know the destinataion of the segue is in the Navigation Controller
         let navigationController = segue.destination as! UINavigationController
         
-        // We know the Navigationo Controller only contains a Creation View Controller
+        // We know the Navigation Controller only contains a Creation View Controller
         let secondScreenViewController = navigationController.topViewController as! secondScreenViewController
+        
         
         if (segue.identifier == "EditSegue"){
             secondScreenViewController.initialQuestion = frontLabel.text
@@ -317,6 +338,10 @@ class firstScreenViewController: UIViewController
             btnOptionTwo.isHidden = true
             btnOptionThree.isHidden = true
             resetButton.isHidden = false
+            ScoreKeeper += 1
+            ScoreKeeperLabel.text = "Score: \(ScoreKeeper) / \(currentIndex+1)"
+            scores.append(ScoreKeeper)
+            print("Scores Array:  \(scores)")
         }
         else
         {
@@ -334,6 +359,10 @@ class firstScreenViewController: UIViewController
             btnOptionOne.isHidden = true
             btnOptionThree.isHidden = true
             resetButton.isHidden = false
+            ScoreKeeper += 1
+            ScoreKeeperLabel.text = "Score: \(ScoreKeeper) / \(currentIndex+1)"
+            scores.append(ScoreKeeper)
+            print("Scores Array:  \(scores)")
         }
         else
         {
@@ -352,6 +381,10 @@ class firstScreenViewController: UIViewController
             btnOptionTwo.isHidden = true
             resetButton.isHidden = true
             resetButton2.isHidden = false
+            ScoreKeeper += 1
+            ScoreKeeperLabel.text = "Score: \(ScoreKeeper) / \(currentIndex+1)"
+            scores.append(ScoreKeeper)
+            print("Scores Array:  \(scores)")
         }
         else
         {
@@ -458,8 +491,27 @@ class firstScreenViewController: UIViewController
         
         // Log it
         print("Flashcards saved to UserDefaults")
-        
+       
     } // End of saveAllFlashcardsToDisk()
+    
+    
+    func saveScoresToDisk()
+    {
+        // Saving scores
+        scores = UserDefaults.standard.array(forKey: "SavingScores") as? [Int] ?? []
+        
+        // Saving scores array to disk using UserDefaults
+        UserDefaults.standard.set(scores, forKey: "SavedScores")
+        
+        // Logging the saved scores
+        print("Scores saved to UserDefaults")
+        
+    } // End of saveScoresToDisk()
+    
+    /*func readSavedScores()
+    {
+        let savedScores = UserDefaults.standard.array(forKey: "SavedScores") as? [Int] ?? []
+    } // End of readSavedScores()*/
     
     func readSavedFlashcards()
     {
@@ -473,11 +525,13 @@ class firstScreenViewController: UIViewController
                 return Flashcard(question: dictionary["question"] ?? "Question", answer: dictionary["answer"] ?? "Answer", answer2: dictionary["answer2"] ?? "Answer2", answer3: dictionary["answer3"] ?? "Answer3")
             }
             
-            // Put all these cards in out flashcards array
+            // Put all these cards in our flashcards array
             flashcards.append(contentsOf: savedCards)
             
         }
     } // End of readSavedFlashcards()
+    
+    
     
     @IBAction func didTapOnDelete(_ sender: Any)
     {
@@ -513,6 +567,11 @@ class firstScreenViewController: UIViewController
         updateLabels()
         saveAllFlashcardsToDisk()
     } // End of deleteCurrentFlahcard()
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     
 } // End of firstScreenViewController
 
